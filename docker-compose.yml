@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  # Brave Search MCP Server
+  brave-search:
+    image: mcp/brave-search
+    container_name: mcp-brave-search
+    ports:
+      - "8091:8080"
+    environment:
+      - BRAVE_MCP_TRANSPORT=stdio
+      - BRAVE_API_KEY=${BRAVE_API_KEY}
+    restart: unless-stopped
+
+  # Perplexity MCP Server
+  perplexity:
+    image: mcp/perplexity-ask
+    container_name: mcp-perplexity
+    ports:
+      - "8092:8080"
+    environment:
+      - PERPLEXITY_API_KEY=${PERPLEXITY_API_KEY}
+    restart: unless-stopped
+
+  # Gmail MCP Server
+  gmail:
+    image: yashtekwani/gmail-mcp
+    container_name: mcp-gmail
+    ports:
+      - "8093:8080"
+    environment:
+      - EMAIL_ADDRESS=${GMAIL_ADDRESS}
+      - IMAP_HOST=imap.gmail.com
+      - IMAP_PORT=993
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - EMAIL_PASSWORD=${GMAIL_APP_PASSWORD}
+    restart: unless-stopped
+
+  # Google Maps MCP Server
+  google-maps:
+    image: mcp/google-maps-comprehensive
+    container_name: mcp-google-maps
+    ports:
+      - "8094:8080"
+    environment:
+      - GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}
+    restart: unless-stopped
+
+  # Firecrawl MCP Server
+  firecrawl:
+    image: mcp/firecrawl
+    container_name: mcp-firecrawl
+    ports:
+      - "8095:8080"
+    environment:
+      - FIRECRAWL_API_URL=https://api.firecrawl.dev/v1
+      - FIRECRAWL_RETRY_MAX_ATTEMPTS=5
+      - FIRECRAWL_RETRY_INITIAL_DELAY=2000
+      - FIRECRAWL_RETRY_MAX_DELAY=30000
+      - FIRECRAWL_RETRY_BACKOFF_FACTOR=3
+      - FIRECRAWL_CREDIT_WARNING_THRESHOLD=2000
+      - FIRECRAWL_CREDIT_CRITICAL_THRESHOLD=500
+      - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY}
+    restart: unless-stopped
+
+  # YouTube Transcript MCP Server
+  youtube:
+    image: mcp/youtube-transcript
+    container_name: mcp-youtube
+    ports:
+      - "8096:8080"
+    restart: unless-stopped
+
+  # Airbnb MCP Server (port 8090)
+  # Note: You'll need to implement or find an Airbnb MCP server
+  # This is a placeholder - replace with actual Airbnb MCP image
+  airbnb:
+    image: your-airbnb-mcp-image
+    container_name: mcp-airbnb
+    ports:
+      - "8090:8080"
+    environment:
+      - AIRBNB_API_KEY=${AIRBNB_API_KEY}
+      # Add other Airbnb-specific environment variables
+    restart: unless-stopped
+
+networks:
+  default:
+    name: mcp-network

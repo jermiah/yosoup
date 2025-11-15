@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash($null)",
+      "Bash(findstr:*)",
+      "Bash(py:*)",
+      "Bash(where:*)",
+      "Bash(cmd.exe /c \"python --version 2>&1\")",
+      "Bash(cmd.exe /c \"python3 --version 2>&1\")",
+      "Bash(cmd.exe /c \"py --version 2>&1\")",
+      "Bash(powershell:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
