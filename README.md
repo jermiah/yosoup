@@ -18,15 +18,16 @@ A lightweight React-based web application that combines fall detection with an A
 - Web Speech API for speech recognition
 
 ### 🛠️ MCP Server Integrations
-The app integrates with 7 different MCP servers running on different ports:
+The app integrates with 8 different MCP servers running on different ports:
 
-1. **Airbnb** (Port 8090) - Search accommodations (placeholder)
-2. **Brave Search** (Port 8091) - Web, image, news, and video search
-3. **Perplexity** (Port 8092) - AI-powered research and Q&A
-4. **Gmail** (Port 8093) - Email management
-5. **Google Maps** (Port 8094) - Geocoding, directions, places search
-6. **Firecrawl** (Port 8095) - Web scraping and content extraction
-7. **YouTube** (Port 8096) - Video transcripts and information
+1. **WhatsApp** (Port 8089) - Send messages, images, and audio via WhatsApp
+2. **Airbnb** (Port 8090) - Search accommodations (placeholder)
+3. **Brave Search** (Port 8091) - Web, image, news, and video search
+4. **Perplexity** (Port 8092) - AI-powered research and Q&A
+5. **Gmail** (Port 8093) - Email management
+6. **Google Maps** (Port 8094) - Geocoding, directions, places search
+7. **Firecrawl** (Port 8095) - Web scraping and content extraction
+8. **YouTube** (Port 8096) - Video transcripts and information
 
 ## Prerequisites
 
@@ -219,7 +220,7 @@ pioneer_hackathon/
 3. If a fall is detected:
    - An emergency alert appears with a 10-second countdown
    - You can cancel if it's a false alarm
-   - After countdown, emergency contacts are notified via email
+   - After countdown, emergency contacts are notified via WhatsApp and email
    - Your location is included in the alert
 
 ### Voice Assistant
@@ -228,6 +229,7 @@ pioneer_hackathon/
 2. Tap the microphone button and speak your request
 3. The assistant will respond with voice using ElevenLabs
 4. Available commands:
+   - "Send a WhatsApp message to [number]"
    - "Search for [query] on the web"
    - "Check my emails"
    - "Send an email to [address]"

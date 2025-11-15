@@ -1,0 +1,68 @@
+# WhatsApp databases - contains all your messages and contacts
+*.db
+*.db-shm
+*.db-wal
+
+# Store directory - contains WhatsApp session data and messages
+store/
+whatsapp-bridge/store/
+**/store/
+**/store/*.db
+**/store/*.log
+
+# Configuration files with paths
+claude_desktop_config.json
+mcp.json
+
+# Logs
+whatsapp.log
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+ENV/
+env/
+
+# Go
+whatsapp-bridge/whatsapp-bridge.exe
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment variables
+.env
+.env.local
+
+# Downloaded media files (if you want to exclude these)
+whatsapp-bridge/media/
+**/downloads/

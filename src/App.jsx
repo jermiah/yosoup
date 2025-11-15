@@ -192,6 +192,7 @@ function App() {
         <section className="card tools-card">
           <h2>🛠️ Available Voice Commands</h2>
           <div className="tools-grid">
+            <div className="tool-item">📱 WhatsApp Messaging</div>
             <div className="tool-item">🔍 Web Search (Brave, Perplexity)</div>
             <div className="tool-item">📧 Gmail Management</div>
             <div className="tool-item">🗺️ Google Maps & Directions</div>

@@ -3,6 +3,7 @@ import axios from 'axios';
 class MCPService {
   constructor() {
     this.servers = {
+      whatsapp: import.meta.env.VITE_MCP_WHATSAPP_URL,
       airbnb: import.meta.env.VITE_MCP_AIRBNB_URL,
       braveSearch: import.meta.env.VITE_MCP_BRAVE_SEARCH_URL,
       perplexity: import.meta.env.VITE_MCP_PERPLEXITY_URL,
@@ -35,6 +36,19 @@ class MCPService {
       console.error(`Error calling ${serverName}.${toolName}:`, error);
       throw error;
     }
+  }
+
+  // WhatsApp MCP methods
+  async sendWhatsAppMessage(to, message) {
+    return this.callTool('whatsapp', 'send_message', { to, message });
+  }
+
+  async sendWhatsAppImage(to, imageUrl, caption = '') {
+    return this.callTool('whatsapp', 'send_image', { to, image_url: imageUrl, caption });
+  }
+
+  async sendWhatsAppAudio(to, audioUrl) {
+    return this.callTool('whatsapp', 'send_audio', { to, audio_url: audioUrl });
   }
 
   // Brave Search MCP methods

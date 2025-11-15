@@ -114,6 +114,7 @@ export default function VoiceInterface() {
 
       // System prompt with MCP tool instructions
       const systemPrompt = `You are a helpful voice assistant with access to various tools:
+- WhatsApp messaging
 - Web search (Brave, Perplexity, Firecrawl)
 - Gmail management
 - Google Maps and location services

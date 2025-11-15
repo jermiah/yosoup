@@ -70,6 +70,14 @@ export default function EmergencyAlert({ onCancel, userLocation }) {
       const timestamp = new Date().toLocaleString();
       const alertMessage = `🚨 EMERGENCY ALERT 🚨\n\nFall detected at ${timestamp}\n\nLocation: ${locationText}\n\nImmediate assistance may be required.\n\nGoogle Maps: https://www.google.com/maps?q=${userLocation?.latitude},${userLocation?.longitude}`;
 
+      // Send WhatsApp message
+      try {
+        await mcpService.sendWhatsAppMessage(emergencyPhone, alertMessage);
+        console.log('WhatsApp alert sent');
+      } catch (error) {
+        console.error('Error sending WhatsApp alert:', error);
+      }
+
       // Send email alert
       try {
         await mcpService.sendGmail(
@@ -81,9 +89,6 @@ export default function EmergencyAlert({ onCancel, userLocation }) {
       } catch (error) {
         console.error('Error sending email alert:', error);
       }
-
-      // Send SMS via Twilio or similar service (to be implemented)
-      // You can integrate Twilio or other SMS service here
 
       setAlertSent(true);
 

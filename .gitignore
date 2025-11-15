@@ -37,7 +37,6 @@ coverage
 # Temporary files
 tmp
 temp
-whatsapp-mcp/
 
 # MCP Server Repositories (external dependencies)
 Gmail-MCP/
@@ -46,3 +45,10 @@ firecrawl-mcp-server/
 google-maps-comprehensive-mcp/
 mcp-youtube-transcript/
 modelcontextprotocol/
+
+# Python virtual environments and cache
+whatsapp-mcp/.venv/
+whatsapp-mcp/__pycache__/
+whatsapp-mcp/**/__pycache__/
+whatsapp-mcp/**/.venv/
+whatsapp-mcp/**/uv.lock
