@@ -46,7 +46,7 @@ GOOGLE_MAPS_API_KEY=your_maps_api_key
 ## 3. Start MCP Servers
 
 ```bash
-# Start all MCP servers
+# Start all MCP servers (including WhatsApp bridge)
 docker-compose --env-file .env.docker up -d
 
 # Check status

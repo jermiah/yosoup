@@ -34,22 +34,24 @@ Edit `.env.docker` (or create it from `.env.docker.example`):
 ```bash
 WHATSAPP_PHONE_NUMBER=+1234567890  # Your phone number with country code
 
-# For local development (default)
-WHATSAPP_BRIDGE_URL=http://localhost:8080
+# For local development (default - using Docker bridge network)
+WHATSAPP_BRIDGE_URL=http://whatsapp-bridge:8080
 
 # For remote/ngrok deployment (if whatsapp-bridge is on different machine)
 # WHATSAPP_BRIDGE_URL=https://your-ngrok-url.ngrok.io
 ```
 
-2. **Start the WhatsApp MCP Server**
+2. **Start WhatsApp Services**
 
 ```bash
-# Start only WhatsApp MCP
-docker-compose up -d whatsapp
+# Start both WhatsApp bridge and MCP server
+docker-compose up -d whatsapp-bridge whatsapp
 
 # Or start all MCP servers
 docker-compose up -d
 ```
+
+**Note**: The WhatsApp bridge is now included in docker-compose.yml, so you don't need to run it separately with `go run main.go`. This solves the gcc dependency issue on Windows!
 
 3. **Authenticate with QR Code**
 

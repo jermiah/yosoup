@@ -72,6 +72,18 @@ services:
       - "8096:8080"
     restart: unless-stopped
 
+  # WhatsApp Bridge (Go service)
+  whatsapp-bridge:
+    build:
+      context: ./whatsapp-mcp/whatsapp-bridge
+      dockerfile: Dockerfile
+    container_name: whatsapp-bridge
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./whatsapp-mcp/store:/app/store
+    restart: unless-stopped
+
   # WhatsApp MCP Server (port 8089)
   whatsapp:
     build:
@@ -82,9 +94,11 @@ services:
       - "8089:8000"
     environment:
       - WHATSAPP_PHONE_NUMBER=${WHATSAPP_PHONE_NUMBER}
-      - WHATSAPP_BRIDGE_URL=${WHATSAPP_BRIDGE_URL:-http://localhost:8080}
+      - WHATSAPP_BRIDGE_URL=${WHATSAPP_BRIDGE_URL:-http://whatsapp-bridge:8080}
     volumes:
       - ./whatsapp-mcp/store:/app/store
+    depends_on:
+      - whatsapp-bridge
     restart: unless-stopped
 
   # Airbnb MCP Server (port 8090)

@@ -347,8 +347,13 @@ async def download_media(request: DownloadMediaRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    print("🚀 Starting WhatsApp Voice Assistant API on http://localhost:5000")
-    print("📝 Interactive API docs available at http://localhost:5000/docs")
-    print("📚 Alternative docs available at http://localhost:5000/redoc")
-    print("💚 Health check available at http://localhost:5000/health")
-    uvicorn.run(app, host="0.0.0.0", port=5000)
+    import os
+    
+    # Get port from environment variable (Cloud Run sets PORT=8080)
+    port = int(os.environ.get("PORT", 8080))
+    
+    print(f"🚀 Starting WhatsApp Voice Assistant API on http://0.0.0.0:{port}")
+    print(f"📝 Interactive API docs available at http://localhost:{port}/docs")
+    print(f"📚 Alternative docs available at http://localhost:{port}/redoc")
+    print(f"💚 Health check available at http://localhost:{port}/health")
+    uvicorn.run(app, host="0.0.0.0", port=port)

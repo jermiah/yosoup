@@ -253,13 +253,16 @@ if __name__ == "__main__":
     # Check if --sse flag is provided for HTTP/SSE transport (for remote hosting)
     # Otherwise use stdio transport (for Claude Desktop)
     if "--sse" in sys.argv:
+        # Get port from environment variable (Cloud Run sets PORT=8080)
+        port = int(os.environ.get("PORT", 8000))
+        
         # Set environment variables for SSE transport configuration
         os.environ['MCP_HOST'] = '0.0.0.0'
-        os.environ['MCP_PORT'] = '8000'
+        os.environ['MCP_PORT'] = str(port)
 
-        print("🚀 Starting MCP server with SSE transport on http://0.0.0.0:8000")
+        print(f"🚀 Starting MCP server with SSE transport on http://0.0.0.0:{port}")
         print("📡 LLMs can connect to this server remotely")
-        print("📡 SSE endpoint: http://localhost:8000/sse")
+        print(f"📡 SSE endpoint: http://localhost:{port}/sse")
         mcp.run(transport='sse')
     else:
         print("🚀 Starting MCP server with stdio transport")

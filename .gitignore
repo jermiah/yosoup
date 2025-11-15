@@ -29,6 +29,12 @@ dist-ssr
 .env.development.local
 .env.test.local
 .env.production.local
+.env.docker
+.env.cloudrun
+
+# WhatsApp session data
+whatsapp-mcp/store/*.db
+whatsapp-mcp/store/*.enc
 
 # Build outputs
 build
