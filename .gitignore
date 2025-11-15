@@ -38,3 +38,11 @@ coverage
 tmp
 temp
 whatsapp-mcp/
+
+# MCP Server Repositories (external dependencies)
+Gmail-MCP/
+brave-search-mcp-server/
+firecrawl-mcp-server/
+google-maps-comprehensive-mcp/
+mcp-youtube-transcript/
+modelcontextprotocol/
