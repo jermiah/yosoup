@@ -1,4 +1,4 @@
-# Fall Detection Voice Agent
+# EcoCare
 
 A lightweight React-based web application that combines fall detection with an AI-powered voice assistant. Built for iPhone with LiveKit, Mistral LLM, ElevenLabs TTS, and multiple MCP (Model Context Protocol) servers.
 
