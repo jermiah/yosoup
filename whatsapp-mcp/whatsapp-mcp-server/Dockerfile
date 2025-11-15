@@ -29,5 +29,6 @@ ENV PYTHONUNBUFFERED=1
 # Expose port
 EXPOSE 8080
 
-# Run the HTTP server
-CMD ["python", "-u", "http_server.py"]
+# Run the MCP server with SSE transport (use --sse for remote access)
+# For REST API, use: CMD ["python", "-u", "http_server.py"]
+CMD ["python", "-u", "main.py", "--sse"]
