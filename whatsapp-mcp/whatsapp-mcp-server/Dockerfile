@@ -29,6 +29,7 @@ ENV PYTHONUNBUFFERED=1
 # Expose port
 EXPOSE 8080
 
-# Run the MCP server with SSE transport (use --sse for remote access)
-# For REST API, use: CMD ["python", "-u", "http_server.py"]
-CMD ["python", "-u", "main.py", "--sse"]
+# Run the HTTP REST API server for Cloud Run
+# This provides HTTP endpoints that can be called by voice assistants
+# For local MCP protocol (Claude Desktop), run: python main.py
+CMD ["python", "-u", "http_server.py"]
