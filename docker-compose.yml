@@ -82,6 +82,7 @@ services:
       - "8089:8000"
     environment:
       - WHATSAPP_PHONE_NUMBER=${WHATSAPP_PHONE_NUMBER}
+      - WHATSAPP_BRIDGE_URL=${WHATSAPP_BRIDGE_URL:-http://localhost:8080}
     volumes:
       - ./whatsapp-mcp/store:/app/store
     restart: unless-stopped

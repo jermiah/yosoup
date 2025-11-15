@@ -2,13 +2,17 @@ import sqlite3
 from datetime import datetime
 from dataclasses import dataclass
 from typing import Optional, List, Tuple
+import os
 import os.path
 import requests
 import json
 import audio
 
 MESSAGES_DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'whatsapp-bridge', 'store', 'messages.db')
-WHATSAPP_API_BASE_URL = "http://localhost:8080/api"
+
+# Use ngrok public URL if provided, otherwise fall back to localhost
+WHATSAPP_BRIDGE_URL = os.getenv('WHATSAPP_BRIDGE_URL', 'http://localhost:8080')
+WHATSAPP_API_BASE_URL = f"{WHATSAPP_BRIDGE_URL}/api"
 
 @dataclass
 class Message:

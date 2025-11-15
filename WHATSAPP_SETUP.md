@@ -33,6 +33,12 @@ Edit `.env.docker` (or create it from `.env.docker.example`):
 
 ```bash
 WHATSAPP_PHONE_NUMBER=+1234567890  # Your phone number with country code
+
+# For local development (default)
+WHATSAPP_BRIDGE_URL=http://localhost:8080
+
+# For remote/ngrok deployment (if whatsapp-bridge is on different machine)
+# WHATSAPP_BRIDGE_URL=https://your-ngrok-url.ngrok.io
 ```
 
 2. **Start the WhatsApp MCP Server**
@@ -88,6 +94,59 @@ python http_server.py
 3. **Scan QR Code**
 
 The QR code will be displayed in the whatsapp-bridge terminal.
+
+### Option 3: Using ngrok for Remote Access
+
+If you need to access the WhatsApp bridge from a different machine or over the internet:
+
+1. **Install ngrok**
+
+```bash
+# Download from https://ngrok.com/download
+# Or install via package manager:
+brew install ngrok  # macOS
+choco install ngrok  # Windows
+```
+
+2. **Start WhatsApp Bridge Locally**
+
+```bash
+cd whatsapp-mcp/whatsapp-bridge
+go run main.go
+```
+
+3. **Expose Bridge with ngrok**
+
+```bash
+# In a new terminal
+ngrok http 8080
+```
+
+You'll see output like:
+```
+Forwarding  https://abc123.ngrok.io -> http://localhost:8080
+```
+
+4. **Configure WhatsApp MCP Server**
+
+Update `.env.docker` with your ngrok URL:
+
+```bash
+WHATSAPP_BRIDGE_URL=https://abc123.ngrok.io
+```
+
+5. **Start WhatsApp MCP Server**
+
+```bash
+docker-compose up -d whatsapp
+```
+
+Now the WhatsApp MCP server will connect to the bridge via ngrok!
+
+**Note**: Free ngrok URLs expire after 2 hours. For production, use:
+- ngrok paid plan with reserved domains
+- Self-hosted tunnel (frp, localtunnel, etc.)
+- Deploy both bridge and MCP server on same machine
 
 ## Usage in the App
 
