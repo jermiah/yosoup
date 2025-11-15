@@ -8,11 +8,19 @@ import requests
 import json
 import audio
 
-MESSAGES_DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'whatsapp-bridge', 'store', 'messages.db')
+# For local development, use the bridge's database
+# For Cloud Run deployment, this database won't exist (bridge is remote via ngrok)
+MESSAGES_DB_PATH = os.getenv(
+    'MESSAGES_DB_PATH',
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'whatsapp-bridge', 'store', 'messages.db')
+)
 
 # Use ngrok public URL if provided, otherwise fall back to localhost
 WHATSAPP_BRIDGE_URL = os.getenv('WHATSAPP_BRIDGE_URL', 'http://localhost:8080')
 WHATSAPP_API_BASE_URL = f"{WHATSAPP_BRIDGE_URL}/api"
+
+# Flag to check if database is available (for local vs cloud deployment)
+DB_AVAILABLE = os.path.exists(MESSAGES_DB_PATH)
 
 @dataclass
 class Message:
@@ -52,10 +60,14 @@ class MessageContext:
     after: List[Message]
 
 def get_sender_name(sender_jid: str) -> str:
+    # If database not available (Cloud Run deployment), return JID as-is
+    if not DB_AVAILABLE:
+        return sender_jid
+
     try:
         conn = sqlite3.connect(MESSAGES_DB_PATH)
         cursor = conn.cursor()
-        
+
         # First try matching by exact JID
         cursor.execute("""
             SELECT name
@@ -63,9 +75,9 @@ def get_sender_name(sender_jid: str) -> str:
             WHERE jid = ?
             LIMIT 1
         """, (sender_jid,))
-        
+
         result = cursor.fetchone()
-        
+
         # If no result, try looking for the number within JIDs
         if not result:
             # Extract the phone number part if it's a JID
@@ -73,21 +85,21 @@ def get_sender_name(sender_jid: str) -> str:
                 phone_part = sender_jid.split('@')[0]
             else:
                 phone_part = sender_jid
-                
+
             cursor.execute("""
                 SELECT name
                 FROM chats
                 WHERE jid LIKE ?
                 LIMIT 1
             """, (f"%{phone_part}%",))
-            
+
             result = cursor.fetchone()
-        
+
         if result and result[0]:
             return result[0]
         else:
             return sender_jid
-        
+
     except sqlite3.Error as e:
         print(f"Database error while getting sender name: {e}")
         return sender_jid
