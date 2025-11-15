@@ -109,6 +109,18 @@ class DownloadMediaRequest(BaseModel):
     message_id: str = Field(..., description="The ID of the message containing the media")
     chat_jid: str = Field(..., description="The JID of the chat containing the message")
 
+# Root endpoint
+@app.get("/")
+async def root():
+    """Root endpoint - redirects to API documentation"""
+    return {
+        "service": "WhatsApp Voice Assistant API",
+        "status": "running",
+        "version": "1.0.0",
+        "docs": "/docs",
+        "health": "/health"
+    }
+
 # Health check endpoint
 @app.get("/health")
 async def health_check():
