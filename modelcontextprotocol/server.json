@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+  "name": "io.github.perplexityai/mcp-server",
+  "title": "Perplexity API Platform",
+  "description": "Real-time web search, reasoning, and research through Perplexity's API",
+  "version": "0.4.1",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@perplexity-ai/mcp-server",
+      "version": "0.4.1",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
+

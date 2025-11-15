@@ -9,7 +9,11 @@
       "Bash(cmd.exe /c \"python --version 2>&1\")",
       "Bash(cmd.exe /c \"python3 --version 2>&1\")",
       "Bash(cmd.exe /c \"py --version 2>&1\")",
-      "Bash(powershell:*)"
+      "Bash(powershell:*)",
+      "Bash(git rm:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

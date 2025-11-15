@@ -38,17 +38,17 @@ coverage
 tmp
 temp
 
-# MCP Server Repositories (external dependencies)
-Gmail-MCP/
-brave-search-mcp-server/
-firecrawl-mcp-server/
-google-maps-comprehensive-mcp/
-mcp-youtube-transcript/
-modelcontextprotocol/
+# Python virtual environments and cache (for all MCP servers)
+**/.venv/
+**/__pycache__/
+**/venv/
+**/*.pyc
+**/uv.lock
+**/.pytest_cache/
 
-# Python virtual environments and cache
-whatsapp-mcp/.venv/
-whatsapp-mcp/__pycache__/
-whatsapp-mcp/**/__pycache__/
-whatsapp-mcp/**/.venv/
-whatsapp-mcp/**/uv.lock
+# Go vendor and build artifacts
+**/vendor/
+**/go.sum.backup
+
+# Node modules in MCP servers
+**/node_modules/
